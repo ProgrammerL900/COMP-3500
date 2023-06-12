@@ -1,0 +1,74 @@
+1. #define sp  $29    /* stack pointer */
+2.  * The only bus we support for MIPS is LAMEbus.
+3. *      splhigh()    sets spl to the highest value, disabling all interrupts.
+   *      spl0()       sets spl to 0, enabling all interrupts.
+4.while we define int64_t and u_int64_t, actually using them
+ * will in some cases cause odd link errors. This has to do with the
+ * way gcc implements 64-bit arithmetic on 32-bit processors. When you
+ * build gcc, it creates a library called libgcc.a that contains,
+ * among other things, implementations of the functions gcc expects to
+ * be able to call for doing 64-bit arithmetic. Unfortunately, you
+ * don't really want to use the standard libgcc.a in a kernel, and
+ * because of the circumstances with the compiler and toolchain in
+ * cs161 it's awkward to use libgcc.a in userlevel programs too, so we
+ * just don't support it. So don't use 64-bit integers unless you're
+ * prepared to cope with these issues yourself
+
+5.	return oldspl; old interrupt state
+6. 15
+
+7.
+ /* hardclocks per second */
+#if OPT_SYNCHPROBS
+/* Make synchronization more exciting :) */
+#define HZ  10000
+#else
+/* More realistic value */
+#define HZ  100
+#endif
+
+8.
+int (*d_open)(struct device *, int flags_from_open);
+	int (*d_close)(struct device *);
+	int (*d_io)(struct device *, struct uio *);
+	int (*d_ioctl)(struct device *, int op, userptr_t data);
+
+9. 32
+10. 15
+11.11. vfs_setcurdir, vfs_clearcurdir, vfs_getcurdir, vfs_sync, vfs_getroot, vfs_getdevname, vfs_lookup, vfs_lookparent, vfs_open, vfs_readlink, vfs_symlink, vfs_mkdir, vfs_link, vfs_remove, vfs_rmdir, vfs_rename, vfs_chdir, vfs_getcwd, vfs_close, vfs_bootstrap, vfs_initbootfs, vfs_setbootfs, vfs_clearbootfs, vfs_adddev, vfs_addfs, vfs_mount, vfs_unmount, vfsunmountall
+12. void thread_sleep(const void *addr);
+13. typedef int32_t pid_t;   /* Process ID */
+14.  vop_open, vop_close vop_reclaim vop_read vop_readlink vop_getdirentry vop_write vop_ioctlvop_stat        
+vop_gettype     
+  vop_tryseek     
+vop_fsync      
+vop_mmap       
+ vop_truncate   
+ vop_namefile   
+vop_creat       
+vop_symlink    
+vop_mkdir       
+vop_link        
+vop_remove      
+vop_rmdir, vop_rename, vop_lookup, vop_lookparent
+
+15./* Longest full path name */
+#define PATH_MAX   1024
+16. #define SYS_reboot       8
+17. #define STDIN_FILENO  0      /* Standard input */
+
+os161/kern/include/kern/unistd.h
+
+18. Yes you can because the scheduleer returns the next thread to run while the thread systems just initializes it to be run.
+19.(Zombies are threads/processes that have exited but not
+ * been fully deleted yet.
+
+20.	runqueue = q_create(32);
+
+21. The name of a device is always just "device:".
+22. (name) raw appended
+23. 	vn->vn_countlock = lock_create("vnode-countlock");
+24. Attempt a seek.
+ * For block devices, require block alignment.
+ * For character devices, prohibit seeking entirely
+

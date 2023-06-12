@@ -1,0 +1,12 @@
+option 1: 
+Explain how to avoid starvation in your implementation.
+
+To avoid starvation there is max time to eat and a max number of time to eat so that all the animals get to eat. This number of time and the amount of times they can eat asserts us that all the animals will get to eat for a certain amount of time and only a certain number of times so that everyone can eat for the same amount. And that no one gets left in starvation.
+
+Comment on your experience of implementing the Cats-andMice program. Can you derive principles about the use of the semaphore synchronization primitives?
+It has been challenging but with the help of the handouts I was able to figure out what I needed to do. THis project made me see how many processes can be coordinated by just using semaphores and how the two functions wait and signal helped with those processes and what the results were.
+
+
+
+
+
